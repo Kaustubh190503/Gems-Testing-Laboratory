@@ -17,7 +17,7 @@ export default function AdminLogin() {
     await new Promise((r) => setTimeout(r, 700)); // simulate network
 
     // FIX: credentials should come from backend JWT — this is placeholder only
-    if (username === "admin" && password === "admin123") {
+    if (username === "admin" && password === "CNKD2005") {
       localStorage.setItem("ngw_admin", "true");
       navigate("/admin/dashboard");
     } else {
