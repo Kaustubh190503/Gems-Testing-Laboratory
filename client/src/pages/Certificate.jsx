@@ -152,7 +152,6 @@ export default function Certificate() {
               <dl className="space-y-4">
                 {FIELD_MAP.map(({ key, label }) => {
                   const value = cert[key];
-                  // Show all fields that have any value (including 0)
                   if (value === null || value === undefined || value === "") return null;
                   return (
                     <div key={key} className="flex justify-between items-baseline border-b border-gold/5 pb-4">
@@ -165,33 +164,15 @@ export default function Certificate() {
                 })}
               </dl>
 
-              {/* Dates & scan count */}
-              <div className="mt-6 pt-5 border-t border-gold/8 space-y-2">
-                <div className="flex justify-between text-[10px] tracking-[0.2em] uppercase">
-                  <span className="text-muted">Date of Issue</span>
-                  <span className="text-gold/70">
-                    {new Date(cert.createdAt).toLocaleDateString("en-IN", {
-                      day: "2-digit", month: "long", year: "numeric",
-                    })}
-                  </span>
-                </div>
-                {cert.lastScanned && (
-                  <div className="flex justify-between text-[10px] tracking-[0.2em] uppercase">
-                    <span className="text-muted">Last Verified</span>
-                    <span className="text-gold/70">
-                      {new Date(cert.lastScanned).toLocaleDateString("en-IN", {
-                        day: "2-digit", month: "long", year: "numeric",
-                      })}
-                    </span>
-                  </div>
-                )}
-                {cert.scanCount > 0 && (
+              {/* Scan count only */}
+              {cert.scanCount > 0 && (
+                <div className="mt-6 pt-5 border-t border-gold/8">
                   <div className="flex justify-between text-[10px] tracking-[0.2em] uppercase">
                     <span className="text-muted">Total Verifications</span>
                     <span className="text-gold/70">{cert.scanCount}</span>
                   </div>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </motion.div>
 
@@ -302,13 +283,13 @@ export default function Certificate() {
                     <Row label="Cert No." value={cert.certificateId} />
                     <Row label="Issued To" value={cert.ownerName} />
                     <div className="flex gap-3 flex-wrap">
-                      {cert.gemstone   && <MiniRow label="Gemstone" value={cert.gemstone} />}
-                      {cert.jewelryType && <MiniRow label="Type"    value={cert.jewelryType} />}
-                      {cert.weight     && <MiniRow label="Weight"   value={`${cert.weight} ct`} />}
-                      {cert.color      && <MiniRow label="Color"    value={cert.color} />}
-                      {cert.clarity    && <MiniRow label="Clarity"  value={cert.clarity} />}
-                      {cert.cut        && <MiniRow label="Cut"      value={cert.cut} />}
-                      {cert.origin     && <MiniRow label="Origin"   value={cert.origin} />}
+                      {cert.gemstone    && <MiniRow label="Gemstone" value={cert.gemstone} />}
+                      {cert.jewelryType && <MiniRow label="Type"     value={cert.jewelryType} />}
+                      {cert.weight      && <MiniRow label="Weight"   value={`${cert.weight} ct`} />}
+                      {cert.color       && <MiniRow label="Color"    value={cert.color} />}
+                      {cert.clarity     && <MiniRow label="Clarity"  value={cert.clarity} />}
+                      {cert.cut         && <MiniRow label="Cut"      value={cert.cut} />}
+                      {cert.origin      && <MiniRow label="Origin"   value={cert.origin} />}
                     </div>
                   </div>
                 </div>
@@ -349,7 +330,6 @@ export default function Certificate() {
   );
 }
 
-// Helper components for card rows
 function Row({ label, value }) {
   if (!value) return null;
   return (
