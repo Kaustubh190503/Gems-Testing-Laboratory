@@ -13,7 +13,7 @@ export default function AddCertificate() {
   const [image, setImage] = useState(null);
 
   const [form, setForm] = useState({
-    certificateId: "", ownerName: "To Whom It May Concern", jewelryType: "",
+    certificateId: "", ownerName: "To Whom It May Concern", jewelryType: "", naturalStamp: "",
     gemstone: "Diamond", weight: "",
     certificateTitle: "Diamond Jewellery Identification Certificate",
     // Grading
@@ -103,6 +103,10 @@ export default function AddCertificate() {
                   <F label="Title shown on certificate *" hint="e.g. Ruby Jewellery Identification Certificate">
                     <input type="text" name="certificateTitle" value={form.certificateTitle} onChange={set}
                       required placeholder="Diamond Jewellery Identification Certificate" className={IC} />
+                  </F>
+                  <F label="Natural Stamp" hint="e.g. Natural Diamond (leave blank for default)">
+                    <input type="text" name="naturalStamp" value={form.naturalStamp} onChange={set}
+                      placeholder="Natural Diamond" className={IC} />
                   </F>
                 </Sec>
 

@@ -271,13 +271,11 @@ export function CertFront({ cert, imageBase64, pageRef }) {
         <div style={{ textAlign: "center", margin: "4px 0 10px" }}>
           <span style={{
             display: "inline-block",
-            border: `2px solid #1a6fb5`,
             color: "#1a6fb5",
             fontStyle: "italic", fontWeight: "bold", fontSize: "15px",
-            padding: "2px 20px",
             letterSpacing: "1px",
           }}>
-            ❝ Natural {gem} ❞
+            ❝ {cert.naturalStamp || `Natural ${gem}`} ❞
           </span>
         </div>
 
