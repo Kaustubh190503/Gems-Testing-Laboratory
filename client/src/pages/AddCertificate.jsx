@@ -11,10 +11,9 @@ export default function AddCertificate() {
   const [saving, setSaving] = useState(false);
   const [previewImage, setPreviewImage] = useState(null);
   const [image, setImage] = useState(null);
-  const [pdf,   setPdf]   = useState(null);
 
   const [form, setForm] = useState({
-    certificateId: "", ownerName: "", jewelryType: "",
+    certificateId: "", ownerName: "To Whom It May Concern", jewelryType: "",
     gemstone: "Diamond", weight: "",
     certificateTitle: "Diamond Jewellery Identification Certificate",
     // Grading
@@ -44,7 +43,6 @@ export default function AddCertificate() {
       const fd = new FormData();
       Object.entries(form).forEach(([k, v]) => fd.append(k, v));
       fd.append("image", image);
-      if (pdf) fd.append("pdf", pdf);
       const res = await api.post("/certificates", fd, { headers: { "Content-Type": "multipart/form-data" } });
       if (res.data.success) navigate(`/certificate/${res.data.certificate.certificateId}`);
     } catch (err) {
@@ -79,9 +77,9 @@ export default function AddCertificate() {
                     <input type="text" name="certificateId" value={form.certificateId} onChange={set}
                       required placeholder="GIC-3807" className={IC} style={{ textTransform:"uppercase" }} />
                   </F>
-                  <F label="Owner / Customer Name *">
-                    <input type="text" name="ownerName" value={form.ownerName} onChange={set}
-                      required placeholder="Full name or To Whom It May Concern" className={IC} />
+                  <F label="Owner / Customer Name">
+                    <input type="text" name="ownerName" value="To Whom It May Concern"
+                      readOnly className={IC + " opacity-60 cursor-not-allowed"} />
                   </F>
                 </Sec>
 
@@ -160,42 +158,22 @@ export default function AddCertificate() {
               </div>
             </div>
 
-            {/* ── FILES ── */}
-            <Sec title="Attachments">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-[9px] tracking-[0.3em] text-muted uppercase mb-3">Jewelry Image *</label>
-                  <label className="glass-card rounded-sm border-dashed border-gold/20 flex flex-col items-center justify-center p-8 cursor-pointer hover:border-gold/40 transition-colors group">
-                    {previewImage ? (
-                      <img src={previewImage} alt="preview" className="w-full h-32 object-contain rounded" />
-                    ) : (
-                      <>
-                        <span className="font-display text-3xl text-gold/20 group-hover:text-gold/40 transition-colors mb-3">◆</span>
-                        <span className="text-[10px] tracking-[0.25em] text-muted uppercase">Click to upload image</span>
-                        <span className="text-[9px] text-muted/50 mt-1">JPG, PNG, WebP</span>
-                      </>
-                    )}
-                    <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" required />
-                  </label>
-                </div>
-                <div>
-                  <label className="block text-[9px] tracking-[0.3em] text-muted uppercase mb-3">Certificate PDF (optional)</label>
-                  <label className="glass-card rounded-sm border-dashed border-gold/20 flex flex-col items-center justify-center p-8 cursor-pointer hover:border-gold/40 transition-colors group">
-                    {pdf ? (
-                      <div className="text-center">
-                        <span className="font-display text-3xl text-gold/60">📄</span>
-                        <p className="text-[10px] text-gold/70 mt-2 truncate max-w-[150px]">{pdf.name}</p>
-                      </div>
-                    ) : (
-                      <>
-                        <span className="font-display text-3xl text-gold/20 group-hover:text-gold/40 transition-colors mb-3">⬡</span>
-                        <span className="text-[10px] tracking-[0.25em] text-muted uppercase">Click to upload PDF</span>
-                        <span className="text-[9px] text-muted/50 mt-1">PDF only</span>
-                      </>
-                    )}
-                    <input type="file" accept=".pdf" onChange={(e) => setPdf(e.target.files[0])} className="hidden" />
-                  </label>
-                </div>
+            {/* ── IMAGE UPLOAD ONLY ── */}
+            <Sec title="Jewelry Image">
+              <div className="max-w-xs">
+                <label className="block text-[9px] tracking-[0.3em] text-muted uppercase mb-3">Upload Image *</label>
+                <label className="glass-card rounded-sm border-dashed border-gold/20 flex flex-col items-center justify-center p-8 cursor-pointer hover:border-gold/40 transition-colors group">
+                  {previewImage ? (
+                    <img src={previewImage} alt="preview" className="w-full h-32 object-contain rounded" />
+                  ) : (
+                    <>
+                      <span className="font-display text-3xl text-gold/20 group-hover:text-gold/40 transition-colors mb-3">◆</span>
+                      <span className="text-[10px] tracking-[0.25em] text-muted uppercase">Click to upload image</span>
+                      <span className="text-[9px] text-muted/50 mt-1">JPG, PNG, WebP</span>
+                    </>
+                  )}
+                  <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" required />
+                </label>
               </div>
             </Sec>
 
