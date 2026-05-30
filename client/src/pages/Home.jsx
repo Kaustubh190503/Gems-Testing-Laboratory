@@ -38,7 +38,7 @@ export default function Home() {
     if (!certificateId.trim()) return;
     setIsSearching(true);
     await new Promise((r) => setTimeout(r, 600));
-    navigate(`/certificate/${certificateId.trim().toUpperCase()}`);
+    navigate(`/certificate/${certificateId.trim().replace(/\s+/g, " ").toUpperCase()}`);
   };
 
   return (
