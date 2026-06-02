@@ -258,13 +258,7 @@ export function CertFront({ cert, imageBase64, pageRef }) {
             <span style={{ color: "#666", fontStyle: "italic" }}>Name: </span>
             <strong style={{ color: "#1a1a1a" }}>{cert.ownerName}</strong>
           </div>
-          <div style={{ textAlign: "right" }}>
-            <span style={{ color: "#666", fontStyle: "italic" }}>Date: </span>
-            <span style={{ color: "#1a1a1a" }}>
-              {new Date(cert.createdAt || Date.now()).toLocaleDateString("en-IN",
-                { day: "2-digit", month: "short", year: "numeric" })}
-            </span>
-          </div>
+
         </div>
 
         {/* ── NATURAL STAMP ── */}

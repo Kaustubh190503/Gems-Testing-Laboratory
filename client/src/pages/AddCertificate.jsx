@@ -52,8 +52,6 @@ export default function AddCertificate() {
     }
   };
 
-  const GEMS = ["Diamond","Ruby","Emerald","Sapphire","Pearl","Opal","Amethyst","Topaz","Aquamarine","Tanzanite","Other"];
-
   return (
     <div className="min-h-screen bg-noir">
       <Navbar />
@@ -84,14 +82,13 @@ export default function AddCertificate() {
                 </Sec>
 
                 <Sec title="Gemstone Details">
-                  <F label="Gemstone Type *">
-                    <select name="gemstone" value={form.gemstone} onChange={set} className={IC + " cursor-pointer"}>
-                      {GEMS.map(g => <option key={g} value={g} className="bg-dark">{g}</option>)}
-                    </select>
+                  <F label="Gemstone Type *" hint="e.g. Diamond, Ruby, Emerald">
+                    <input type="text" name="gemstone" value={form.gemstone} onChange={set}
+                      required placeholder="Diamond" className={IC} />
                   </F>
-                  <F label="Jewelry Type *" hint="e.g. Ring, Necklace, Pendant">
+                  <F label="Jewelry Type" hint="e.g. Ring, Necklace, Pendant">
                     <input type="text" name="jewelryType" value={form.jewelryType} onChange={set}
-                      required placeholder="Ring" className={IC} />
+                      placeholder="Ring" className={IC} />
                   </F>
                   <F label="Est. Weight *" hint="e.g. 0.075">
                     <input type="text" name="weight" value={form.weight} onChange={set}
