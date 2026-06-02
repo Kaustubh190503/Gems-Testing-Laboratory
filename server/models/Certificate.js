@@ -4,7 +4,7 @@ const certificateSchema = new mongoose.Schema(
   {
     certificateId: { type: String, required: true, unique: true, trim: true },
     ownerName:     { type: String, required: true, trim: true },
-    jewelryType:   { type: String, required: true },
+    jewelryType:   { type: String, default: "" },
     gemstone:      { type: String, default: "Diamond" },
     weight:        { type: String, required: true },
 
@@ -24,6 +24,8 @@ const certificateSchema = new mongoose.Schema(
 
     // Certificate title (shown on the certificate document)
     certificateTitle: { type: String, default: "" },
+
+    naturalStamp:     { type: String, default: "" },
 
     // Remarks
     description:      { type: String, default: "" },
