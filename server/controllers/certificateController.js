@@ -19,6 +19,7 @@ exports.createCertificate = async (req, res) => {
       color, clarity, cut, origin,
       opticalClass, opticalCharacter, refractiveIndex, dimensions,
       description, conclusion, specificComments, issuedBy,
+      naturalStamp, certificateTitle,
     } = req.body;
 
     const image           = req.files?.image?.[0]?.path || "";
@@ -44,6 +45,8 @@ exports.createCertificate = async (req, res) => {
       specificComments: specificComments || "",
       image, certificateFile, qrCode,
       issuedBy: issuedBy || "GEM TESTING LABORATORY, Bareilly",
+      naturalStamp: naturalStamp || "",
+      certificateTitle: certificateTitle || "",
     });
 
     await cert.save();
